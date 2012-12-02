@@ -6,10 +6,89 @@
 // Description : Hello World in C++, Ansi-style
 //============================================================================
 
+#if defined(__APPLE__) && defined(__MACH__)
+	#include <GLUT/glut.h>
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glu.h>
+#else
+	#include <glut.h>
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+#endif
+
 #include <iostream>
+
+#include <stdio.h>
+#include "objLoader.h"
+#include "Scene.h"
+
 using namespace std;
 
-int main() {
-	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+objLoader *data;
+Scene *scene;
+double myObsParam[16];
+
+void init()
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(90, 1.0, 0.1, 100);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(6,6,2,0,0,0,0,0,1) ;
+    glGetDoublev(GL_MODELVIEW_MATRIX, myObsParam);
+
+    /* mode RGB : choix de la couleur de fond */
+    glClearColor(0.8,0.8,0.8,1);
+    
+    /* applique la couleur de fond et efface le z-buffer*/
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);	//active le test de profondeur pour eliminer les partie cachee
+    glEnable(GL_LIGHTING);
+    glShadeModel(GL_SMOOTH);
+}
+
+void afficherScene()
+{
+	scene = new Scene(data);
+	scene->dessineScene();
+}
+
+void redimensionner(int w, int h)
+{
+	scene->reshape(w, h);
+}
+
+int main(int argc, char **argv)
+{
+    // Chargement de la scene
+    data = new objLoader();
+	data->load((char *) "models/cube2.obj");
+    
+    glutInit(&argc, argv);
+    glutInitWindowSize(700, 700);   /* taille de la fenetre ecran */
+    
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);     /* mode rgb */
+    
+    glutCreateWindow("Tower Defense 3D");
+    
+    // Affichage de la scene
+    glutDisplayFunc(afficherScene);
+    
+    // Fonction de rechargement de la scene
+    glutReshapeFunc(redimensionner);
+    
+    // Gestion du clavier
+    //glutSpecialFunc(special_key_press); //declare la fonction de gestion des touches speciales du clavier
+    //glutKeyboardFunc(key_press);		//declare la fonction de gestion des touches alpha numÈriques du clavier
+    
+    // Gestion de la souris
+    //glutMouseFunc(mouse_press);			//declare la fonction de gestion des boutons de la souris
+    //glutMotionFunc(mouse_move);			//declare la fonction de gestion des des mouvements de la souris
+    
+    init();
+    glutMainLoop();
+
 	return 0;
 }
