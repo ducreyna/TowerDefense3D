@@ -14,7 +14,7 @@ Scene::Scene(objLoader* data):data(data){}
 
 Scene::~Scene() {}
 
-void Scene::dessineScene()
+void Scene::drawScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT);			//efface l'ecran
 	glClear(GL_DEPTH_BUFFER_BIT);			//efface le buffer de profondeur
@@ -22,17 +22,17 @@ void Scene::dessineScene()
 	for(int i = 0; i < data->faceCount; i++)
 	{
 		glPushMatrix();
-		dessineFace(i);
+		drawFace(i);
 		glPopMatrix();
 	}
 
 	// Affichage du repere
-	dessineRepere();
+	drawRepere();
 
 	glutSwapBuffers();						//echange la fenetre active et la fenetre de travail
 }
 
-void Scene::dessineFace(int indiceFace)
+void Scene::drawFace(int indiceFace)
 {
 	int j;
 
@@ -50,7 +50,7 @@ void Scene::dessineFace(int indiceFace)
 	glEnd();
 }
 
-void Scene::dessineRepere()
+void Scene::drawRepere()
 {
 	int len=5;
 	glDisable(GL_LIGHTING);

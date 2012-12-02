@@ -26,14 +26,14 @@ public:
 	Scene(objLoader* data);
 	virtual ~Scene();
 
-	void dessineScene();
+	void drawScene();
 	void reshape(int width, int height);
 
 private:
 	objLoader* data;
 
-	void dessineFace(int indiceFace);
-	void dessineRepere();
+	void drawFace(int indiceFace);
+	void drawRepere();
 };
 
 #endif /* SCENE_H_ */

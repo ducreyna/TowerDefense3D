@@ -49,13 +49,13 @@ void init()
     glShadeModel(GL_SMOOTH);
 }
 
-void afficherScene()
+void drawScene()
 {
 	scene = new Scene(data);
-	scene->dessineScene();
+	scene->drawScene();
 }
 
-void redimensionner(int w, int h)
+void reshape(int w, int h)
 {
 	scene->reshape(w, h);
 }
@@ -74,10 +74,10 @@ int main(int argc, char **argv)
     glutCreateWindow("Tower Defense 3D");
     
     // Affichage de la scene
-    glutDisplayFunc(afficherScene);
+    glutDisplayFunc(drawScene);
     
     // Fonction de rechargement de la scene
-    glutReshapeFunc(redimensionner);
+    glutReshapeFunc(reshape);
     
     // Gestion du clavier
     //glutSpecialFunc(special_key_press); //declare la fonction de gestion des touches speciales du clavier
