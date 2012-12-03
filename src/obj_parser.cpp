@@ -1,5 +1,7 @@
+#include <iostream>
 #include <stdio.h>
 #include <string.h>
+#include <string>
 #include <stdlib.h>
 #include <stddef.h>
 #include "obj_parser.h"
@@ -405,7 +407,10 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 		else if( strequal(current_token, "mtllib") ) // mtllib
 		{
 			strncpy(growable_data->material_filename, strtok(NULL, WHITESPACE), OBJ_FILENAME_LENGTH);
-			obj_parse_mtl_file(growable_data->material_filename, &growable_data->material_list);
+			char pathMtl[256];
+			strcpy(pathMtl, "models/");
+			strcat(pathMtl, growable_data->material_filename);
+			obj_parse_mtl_file(pathMtl, &growable_data->material_list);
 			continue;
 		}
 		

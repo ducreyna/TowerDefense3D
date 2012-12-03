@@ -10,8 +10,6 @@
 Scene::Scene() {
 }
 
-Scene::Scene(objLoader* data):data(data){}
-
 Scene::~Scene() {}
 
 void Scene::drawScene()
@@ -19,11 +17,9 @@ void Scene::drawScene()
 	glClear(GL_COLOR_BUFFER_BIT);			//efface l'ecran
 	glClear(GL_DEPTH_BUFFER_BIT);			//efface le buffer de profondeur
 
-	for(int i = 0; i < data->faceCount; i++)
+	for(int i = 0; i < this->objects.size(); i++)
 	{
-		glPushMatrix();
-		drawFace(i);
-		glPopMatrix();
+		drawObject(this->objects[i]);
 	}
 
 	// Affichage du repere
@@ -32,19 +28,30 @@ void Scene::drawScene()
 	glutSwapBuffers();						//echange la fenetre active et la fenetre de travail
 }
 
-void Scene::drawFace(int indiceFace)
+void Scene::drawObject(objLoader* object)
+{
+	for(int i = 0; i < object->faceCount; i++)
+	{
+		glPushMatrix();
+		drawFace(object, i);
+		glPopMatrix();
+	}
+}
+
+void Scene::drawFace(objLoader *object, int indexFace)
 {
 	int j;
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glBegin(GL_POLYGON);
+	// TODO definir les normales
 	// TODO definir les materiaux des lumieres
 
-	for(int i = 0; i < data->faceList[indiceFace]->vertex_count; i++)
+	for(int i = 0; i < object->faceList[indexFace]->vertex_count; i++)
 	{
-		j = data->faceList[indiceFace]->vertex_index[i];
-		glVertex3d(data->vertexList[j]->e[0], data->vertexList[j]->e[1], data->vertexList[j]->e[2]);
+		j = object->faceList[indexFace]->vertex_index[i];
+		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[1], object->vertexList[j]->e[2]);
 	}
 
 	glEnd();
@@ -69,6 +76,26 @@ void Scene::drawRepere()
 
 	glEnd();
 	glEnable(GL_LIGHTING);
+}
+
+void Scene::addObject(objLoader *object)
+{
+	this->objects.push_back(object);
+}
+
+void Scene::removeObject(objLoader *object)
+{
+	bool found = false;
+	for (unsigned int i = 0; !found && i < this->objects.size(); ++i)
+	{
+		if (this->objects[i] == object)
+		{
+			this->objects[i] = this->objects[this->objects.size() -1];
+			this->objects.pop_back();
+			found = true;
+			free(object);
+		}
+	}
 }
 
 void Scene::reshape(int width, int height)

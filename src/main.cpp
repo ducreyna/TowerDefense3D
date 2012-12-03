@@ -24,10 +24,10 @@
 
 using namespace std;
 
-objLoader *data;
+objLoader *landscape;
 Scene *scene;
 double myObsParam[16];
-
+int i = 0;
 void init()
 {
 	glMatrixMode(GL_PROJECTION);
@@ -36,7 +36,7 @@ void init()
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(6,6,2,0,0,0,0,0,1) ;
+    gluLookAt(6,6,6,0,0,0,0,0,1) ;
     glGetDoublev(GL_MODELVIEW_MATRIX, myObsParam);
 
     /* mode RGB : choix de la couleur de fond */
@@ -51,7 +51,6 @@ void init()
 
 void drawScene()
 {
-	scene = new Scene(data);
 	scene->drawScene();
 }
 
@@ -62,9 +61,13 @@ void reshape(int w, int h)
 
 int main(int argc, char **argv)
 {
-    // Chargement de la scene
-    data = new objLoader();
-	data->load((char *) "models/cube2.obj");
+	scene = new Scene();
+
+    // Chargement de l'environnement statique
+    landscape = new objLoader();
+	landscape->load((char *) "models/cube2.obj");
+
+	scene->addObject(landscape);
     
     glutInit(&argc, argv);
     glutInitWindowSize(700, 700);   /* taille de la fenetre ecran */
@@ -75,7 +78,7 @@ int main(int argc, char **argv)
     
     // Affichage de la scene
     glutDisplayFunc(drawScene);
-    
+
     // Fonction de rechargement de la scene
     glutReshapeFunc(reshape);
     

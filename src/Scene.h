@@ -18,21 +18,29 @@
 	#include <GL/glu.h>
 #endif
 
+#include <iostream>
+#include <vector>
+#include <iterator>
+
 #include "objLoader.h"
+
+using namespace std;
 
 class Scene {
 public:
 	Scene();
-	Scene(objLoader* data);
 	virtual ~Scene();
 
 	void drawScene();
 	void reshape(int width, int height);
+	void addObject(objLoader *object);
+	void removeObject(objLoader *object);
 
 private:
-	objLoader* data;
+	vector<objLoader*> objects;
 
-	void drawFace(int indiceFace);
+	void drawObject(objLoader* object);
+	void drawFace(objLoader *object, int indexFace);
 	void drawRepere();
 };
 
