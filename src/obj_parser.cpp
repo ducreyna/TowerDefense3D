@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <stddef.h>
+#include <exception>
 #include "obj_parser.h"
 #include "list.h"
 #include "string_extra.h"
@@ -167,7 +168,13 @@ obj_vector* obj_parse_vector()
 	obj_vector *v = (obj_vector*)malloc(sizeof(obj_vector));
 	v->e[0] = atof( strtok(NULL, WHITESPACE));
 	v->e[1] = atof( strtok(NULL, WHITESPACE));
-	v->e[2] = atof( strtok(NULL, WHITESPACE));
+
+	char *token = strtok(NULL, WHITESPACE);
+	if(token != NULL)
+	{
+		v->e[2] = atof(token);
+	}
+
 	return v;
 }
 
@@ -329,7 +336,6 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 		//skip comments
 		if( current_token == NULL || current_token[0] == '#')
 			continue;
-
 		//parse objects
 		else if( strequal(current_token, "v") ) //process vertex
 		{
@@ -408,7 +414,7 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 		{
 			strncpy(growable_data->material_filename, strtok(NULL, WHITESPACE), OBJ_FILENAME_LENGTH);
 			char pathMtl[256];
-			strcpy(pathMtl, "models/");
+			strcpy(pathMtl, RESSOURCE_PATH);
 			strcat(pathMtl, growable_data->material_filename);
 			obj_parse_mtl_file(pathMtl, &growable_data->material_list);
 			continue;

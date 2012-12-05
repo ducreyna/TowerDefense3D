@@ -17,10 +17,12 @@
 #endif
 
 #include <iostream>
-
+#include <string>
 #include <stdio.h>
 #include "objLoader.h"
 #include "Scene.h"
+
+#include <obj.hpp>
 
 using namespace std;
 
@@ -59,13 +61,18 @@ void reshape(int w, int h)
 	scene->reshape(w, h);
 }
 
+void geometric_vertex_callback(obj::float_type x, obj::float_type y, obj::float_type z)
+{
+  std::cout << "v " << x << " " << y << " " << z << "\n";
+}
+
 int main(int argc, char **argv)
 {
 	scene = new Scene();
 
     // Chargement de l'environnement statique
     landscape = new objLoader();
-	landscape->load((char *) "models/cube2.obj");
+    landscape->load((char *) "bonhomme_lo12.obj");
 
 	scene->addObject(landscape);
     

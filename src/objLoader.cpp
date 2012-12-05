@@ -3,8 +3,11 @@
 
 int objLoader::load(char *filename)
 {
+	char pathObj[256];
+	strcpy(pathObj, RESSOURCE_PATH);
+	strcat(pathObj, filename);
 	int no_error = 1;
-	no_error = parse_obj_scene(&data, filename);
+	no_error = parse_obj_scene(&data, pathObj);
 	if(no_error)
 	{
 		this->vertexCount = data.vertex_count;
