@@ -176,7 +176,7 @@ obj_vector* obj_parse_vector()
 	}
 	else
 	{
-		v->e[2] = "0";
+		//v->e[2] = "0";
 	}
 
 	return v;
@@ -212,6 +212,7 @@ int obj_parse_mtl_file(char *filename, list *material_list)
 
 	while( fgets(current_line, OBJ_LINE_SIZE, mtl_file_stream) )
 	{
+		std::cout << line_number << " " << current_line;
 		current_token = strtok( current_line, " \t\n\r");
 		line_number++;
 		
@@ -285,14 +286,13 @@ int obj_parse_mtl_file(char *filename, list *material_list)
 		{
 		}
 		// texture map
-		else if( strequal(current_token, "map_Ka") && material_open)
+		else if( (strequal(current_token, "map_Ka") || strequal(current_token, "map_Kd")) && material_open)
 		{
 			strncpy(current_mtl->texture_filename, strtok(NULL, " \t"), OBJ_FILENAME_LENGTH);
 		}
 		else
 		{
-			fprintf(stderr, "Unknown command '%s' in material file %s at line %i:\n\t%s\n",
-					current_token, filename, line_number, current_line);
+			//printf("Unknown command '%s' in material file %s at line %i:\n\t%s\n", current_token, filename, line_number, current_line);
 			//return 0;
 		}
 	}
@@ -421,6 +421,7 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 			strcpy(pathMtl, RESSOURCE_PATH);
 			strcat(pathMtl, growable_data->material_filename);
 			obj_parse_mtl_file(pathMtl, &growable_data->material_list);
+			std::cout << "J'ai parsŽ le mtl" << std::endl;
 			continue;
 		}
 		

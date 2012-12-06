@@ -9,84 +9,84 @@ d 1
 illum 2
 
 
-newmtl _bark4.dds
+newmtl _bark4.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\bark4.dds
+map_Kd bark4.png
 
 
-newmtl _bark5.dds
+newmtl _bark5.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\bark5.dds
+map_Kd bark5.png
 
 
-newmtl _castledoorwins.dds
+newmtl _castledoorwins.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\castledoorwins.dds
+map_Kd castledoorwins.png
 
 
-newmtl _leaves17.dds
+newmtl _leaves17.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\leaves17.dds
+map_Kd leaves17.png
 
 
-newmtl _leaves19.dds
+newmtl _leaves19.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\leaves19.dds
+map_Kd leaves19.png
 
 
-newmtl _shingles3.dds
+newmtl _shingles3.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\shingles3.dds
+map_Kd shingles3.png
 
 
-newmtl _stonewall6.dds
+newmtl _stonewall6.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\stonewall6.dds
+map_Kd stonewall6.png
 
 
-newmtl _tile28.dds
+newmtl _tile28.png
 Ns 0
 Ka 0.000000 0.000000 0.000000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\tile28.dds
+map_Kd tile28.png
 
 
 newmtl _tree_branches-leaves0
@@ -96,6 +96,6 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd C:\Users\eoched\Desktop\NouveauClient\trunk\donnees\3dobjects\tree_branches-leaves05.dds
+map_Kd tree_branches-leaves05.png
 
 

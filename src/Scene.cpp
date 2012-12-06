@@ -62,7 +62,8 @@ void Scene::drawFace(objLoader *object, int indexFace)
 	for(int i = 0; i < object->faceList[indexFace]->vertex_count; i++)
 	{
 		j = object->faceList[indexFace]->vertex_index[i];
-		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[1], object->vertexList[j]->e[2]);
+		//cout << "x: " << object->vertexList[j]->e[0]
+		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[2], object->vertexList[j]->e[1]);
 	}
 
 	glEnd();
