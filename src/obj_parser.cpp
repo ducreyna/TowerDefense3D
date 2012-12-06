@@ -174,6 +174,10 @@ obj_vector* obj_parse_vector()
 	{
 		v->e[2] = atof(token);
 	}
+	else
+	{
+		v->e[2] = "0";
+	}
 
 	return v;
 }

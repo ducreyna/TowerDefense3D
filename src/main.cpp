@@ -22,14 +22,15 @@
 #include "objLoader.h"
 #include "Scene.h"
 
-#include <obj.hpp>
-
 using namespace std;
 
 objLoader *landscape;
 Scene *scene;
 double myObsParam[16];
-int i = 0;
+
+/**
+ * Function initializing the OpenGL window
+ */
 void init()
 {
 	glMatrixMode(GL_PROJECTION);
@@ -41,61 +42,65 @@ void init()
     gluLookAt(6,6,6,0,0,0,0,0,1) ;
     glGetDoublev(GL_MODELVIEW_MATRIX, myObsParam);
 
-    /* mode RGB : choix de la couleur de fond */
+    /* Set the background color: RGB mode */
     glClearColor(0.8,0.8,0.8,1);
     
-    /* applique la couleur de fond et efface le z-buffer*/
+    /* Apply background color and erase z-buffer */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glEnable(GL_DEPTH_TEST);	//active le test de profondeur pour eliminer les partie cachee
+    glEnable(GL_DEPTH_TEST);	// Z-buffer activation
     glEnable(GL_LIGHTING);
     glShadeModel(GL_SMOOTH);
 }
 
+/**
+ * Callback function for drawing the scene
+ */
 void drawScene()
 {
 	scene->drawScene();
 }
 
+/**
+ * Callback function for reshaping the scene
+ * @param w Integer representing the width
+ * @param h Integer representing the height
+ */
 void reshape(int w, int h)
 {
 	scene->reshape(w, h);
 }
 
-void geometric_vertex_callback(obj::float_type x, obj::float_type y, obj::float_type z)
-{
-  std::cout << "v " << x << " " << y << " " << z << "\n";
-}
 
 int main(int argc, char **argv)
 {
 	scene = new Scene();
 
-    // Chargement de l'environnement statique
+    // Loading the static environnement
     landscape = new objLoader();
     landscape->load((char *) "bonhomme_lo12.obj");
 
 	scene->addObject(landscape);
     
     glutInit(&argc, argv);
-    glutInitWindowSize(700, 700);   /* taille de la fenetre ecran */
+    glutInitWindowSize(700, 700);
     
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);     /* mode rgb */
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);     // RGB mode
     
     glutCreateWindow("Tower Defense 3D");
     
-    // Affichage de la scene
+    // Display the scene
     glutDisplayFunc(drawScene);
 
-    // Fonction de rechargement de la scene
+    // Reshape the scene
     glutReshapeFunc(reshape);
     
-    // Gestion du clavier
-    //glutSpecialFunc(special_key_press); //declare la fonction de gestion des touches speciales du clavier
-    //glutKeyboardFunc(key_press);		//declare la fonction de gestion des touches alpha numÈriques du clavier
+    // Keyboard functions
+    //glutSpecialFunc(special_key_press); // Functions for the special keys of the keyboard
+    //glutKeyboardFunc(key_press);		  // Functions for the alphanumeric keys
     
-    // Gestion de la souris
-    //glutMouseFunc(mouse_press);			//declare la fonction de gestion des boutons de la souris
-    //glutMotionFunc(mouse_move);			//declare la fonction de gestion des des mouvements de la souris
+    // Mouse functions
+    //glutMouseFunc(mouse_press);		  // Mouse buttons
+    //glutMotionFunc(mouse_move);		  // Mouse moves
     
     init();
     glutMainLoop();

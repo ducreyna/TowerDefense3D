@@ -7,27 +7,33 @@
 
 #include "scene.h"
 
-Scene::Scene() {
-}
+Scene::Scene() {}
 
 Scene::~Scene() {}
 
+/**
+ * Method for drawing the scene
+ */
 void Scene::drawScene()
 {
-	glClear(GL_COLOR_BUFFER_BIT);			//efface l'ecran
-	glClear(GL_DEPTH_BUFFER_BIT);			//efface le buffer de profondeur
+	glClear(GL_COLOR_BUFFER_BIT);			// Erase the screen
+	glClear(GL_DEPTH_BUFFER_BIT);			// Erase the z-buffer
 
 	for(int i = 0; i < this->objects.size(); i++)
 	{
 		drawObject(this->objects[i]);
 	}
 
-	// Affichage du repere
+	// Display the reference x y z
 	drawRepere();
 
-	glutSwapBuffers();						//echange la fenetre active et la fenetre de travail
+	glutSwapBuffers();		// switch active window and work window
 }
 
+/**
+ * Method for drawing an object
+ * @param *object The object to draw in the scene
+ */
 void Scene::drawObject(objLoader* object)
 {
 	for(int i = 0; i < object->faceCount; i++)
@@ -38,6 +44,11 @@ void Scene::drawObject(objLoader* object)
 	}
 }
 
+/**
+ * Method for drawing a face
+ * @param *object The object that owns the face
+ * @param indexFace The index of the face
+ */
 void Scene::drawFace(objLoader *object, int indexFace)
 {
 	int j;
@@ -57,6 +68,9 @@ void Scene::drawFace(objLoader *object, int indexFace)
 	glEnd();
 }
 
+/**
+ * Method for drawing the 3D reference
+ */
 void Scene::drawRepere()
 {
 	int len=5;
@@ -78,11 +92,35 @@ void Scene::drawRepere()
 	glEnable(GL_LIGHTING);
 }
 
+/**
+ * Public method for reshaping the scene
+ * @param width The new width of the scene
+ * @param heigth The new height of the scene
+ */
+void Scene::reshape(int width, int height)
+{
+	if(height < 1) height = 1;
+
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(90.0, (GLfloat)width / (GLfloat)height, 0.1, 100.0);
+	glMatrixMode(GL_MODELVIEW);
+}
+
+/**
+ * Public method for adding an object in the scene
+ * @param The object to add
+ */
 void Scene::addObject(objLoader *object)
 {
 	this->objects.push_back(object);
 }
 
+/**
+ * Public method for removing an object in the scene
+ * @param The object to remove
+ */
 void Scene::removeObject(objLoader *object)
 {
 	bool found = false;
@@ -96,16 +134,5 @@ void Scene::removeObject(objLoader *object)
 			free(object);
 		}
 	}
-}
-
-void Scene::reshape(int width, int height)
-{
-	if(height < 1) height = 1;
-
-	glViewport(0, 0, width, height);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(90.0, (GLfloat)width / (GLfloat)height, 0.1, 100.0);
-	glMatrixMode(GL_MODELVIEW);
 }
 

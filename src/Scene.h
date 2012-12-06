@@ -31,14 +31,17 @@ public:
 	Scene();
 	virtual ~Scene();
 
+	/* Public methods */
 	void drawScene();
 	void reshape(int width, int height);
 	void addObject(objLoader *object);
 	void removeObject(objLoader *object);
 
 private:
+	/* Private attributes*/
 	vector<objLoader*> objects;
 
+	/* Private methods */
 	void drawObject(objLoader* object);
 	void drawFace(objLoader *object, int indexFace);
 	void drawRepere();
