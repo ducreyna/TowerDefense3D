@@ -16,7 +16,7 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd textures\fruits&vegs.png
+map_Kd fruits&vegs.png
 
 
 newmtl _tile28.png
@@ -26,5 +26,6 @@ Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
 illum 2
-map_Kd textures\tile28.png
+map_Kd tile28.png
+
 
