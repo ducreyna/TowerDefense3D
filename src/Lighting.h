@@ -8,10 +8,46 @@
 #ifndef LIGHTING_H_
 #define LIGHTING_H_
 
+#if defined(__APPLE__) && defined(__MACH__)
+	#include <GLUT/glut.h>
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glu.h>
+#else
+	#include <glut.h>
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+#endif
+
+#include "LightStruture.h"
+#include "objLoader.h"
+#include <iostream>
+#include <math.h>
+#include <vector>
+
+using namespace std;
+class Scene;
+
 class Lighting {
 public:
 	Lighting();
+	Lighting(vector<objLoader> *objects);
 	virtual ~Lighting();
+
+	/* Methods */
+	void defineMaterials(int indexMaterial);
+	void defineSources();
+	/* Setters */
+	void setObjects(vector<objLoader*> objects);
+
+private:
+	/* Attributes */
+	vector<objLoader*> objects;
+	vector<LIGHT_SOURCE> lightSources;
+
+	/* Methods */
+	GLdouble norm(GLdouble v[3]);
+	GLdouble* vectorProduct(GLdouble u[3], GLdouble v[3]);
+	GLenum ligth_i(int i);
 };
 
 #endif /* LIGHTING_H_ */

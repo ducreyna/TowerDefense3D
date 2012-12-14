@@ -39,7 +39,7 @@ void init()
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(6,6,6,0,0,0,0,0,1) ;
+    gluLookAt(15,15,10,0,0,0,0,0,1) ;
     glGetDoublev(GL_MODELVIEW_MATRIX, myObsParam);
 
     /* Set the background color: RGB mode */
@@ -73,11 +73,12 @@ void reshape(int w, int h)
 
 int main(int argc, char **argv)
 {
+	// Scene creation
 	scene = new Scene();
 
     // Loading the static environnement
     landscape = new objLoader();
-    landscape->load((char *) "bonhomme_lo12.obj");
+    landscape->load((char *) "terrain_lo12.obj");
 
 	scene->addObject(landscape);
     

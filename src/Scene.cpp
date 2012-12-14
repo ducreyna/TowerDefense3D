@@ -7,7 +7,10 @@
 
 #include "scene.h"
 
-Scene::Scene() {}
+Scene::Scene()
+{
+	this->lights = new Lighting();
+}
 
 Scene::~Scene() {}
 
@@ -19,7 +22,12 @@ void Scene::drawScene()
 	glClear(GL_COLOR_BUFFER_BIT);			// Erase the screen
 	glClear(GL_DEPTH_BUFFER_BIT);			// Erase the z-buffer
 
-	for(int i = 0; i < this->objects.size(); i++)
+	// Transmit all objects in the scene for lighting treatment
+	this->lights->setObjects(this->objects);
+
+	this->lights->defineSources();
+
+	for(unsigned int i = 0; i < this->objects.size(); i++)
 	{
 		drawObject(this->objects[i]);
 	}
@@ -57,13 +65,24 @@ void Scene::drawFace(objLoader *object, int indexFace)
 
 	glBegin(GL_POLYGON);
 	// TODO definir les normales
-	// TODO definir les materiaux des lumieres
+	GLdouble A[3];
+	j = object->faceList[indexFace]->normal_index[0];
+	A[0] = object->normalList[j]->e[0];
+	A[1] = object->normalList[j]->e[1];
+	A[2] = object->normalList[j]->e[2];
+	glNormal3dv(A);
+
+	// Couleur verte
+		glColor3d(0, 1, 0);
+
+	// Material definition
+	if(object->faceList[indexFace]->material_index != -1)
+		this->lights->defineMaterials(object->faceList[indexFace]->material_index);
 
 	for(int i = 0; i < object->faceList[indexFace]->vertex_count; i++)
 	{
 		j = object->faceList[indexFace]->vertex_index[i];
-		//cout << "x: " << object->vertexList[j]->e[0]
-		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[2], object->vertexList[j]->e[1]);
+		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[1], object->vertexList[j]->e[2]);
 	}
 
 	glEnd();
@@ -135,5 +154,13 @@ void Scene::removeObject(objLoader *object)
 			free(object);
 		}
 	}
+}
+
+/**
+ * Getter for objects list
+ */
+vector<objLoader*> Scene::getObjects()
+{
+	return this->objects;
 }
 

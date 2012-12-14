@@ -167,16 +167,16 @@ obj_vector* obj_parse_vector()
 {
 	obj_vector *v = (obj_vector*)malloc(sizeof(obj_vector));
 	v->e[0] = atof( strtok(NULL, WHITESPACE));
-	v->e[1] = atof( strtok(NULL, WHITESPACE));
+	v->e[2] = atof( strtok(NULL, WHITESPACE));
 
 	char *token = strtok(NULL, WHITESPACE);
 	if(token != NULL)
 	{
-		v->e[2] = atof(token);
+		v->e[1] = atof(token);
 	}
 	else
 	{
-		//v->e[2] = "0";
+		v->e[1] = 0;
 	}
 
 	return v;
@@ -212,7 +212,6 @@ int obj_parse_mtl_file(char *filename, list *material_list)
 
 	while( fgets(current_line, OBJ_LINE_SIZE, mtl_file_stream) )
 	{
-		std::cout << line_number << " " << current_line;
 		current_token = strtok( current_line, " \t\n\r");
 		line_number++;
 		
@@ -336,7 +335,6 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 	{
 		current_token = strtok( current_line, " \t\n\r");
 		line_number++;
-		
 		//skip comments
 		if( current_token == NULL || current_token[0] == '#')
 			continue;
@@ -421,7 +419,6 @@ int obj_parse_obj_file(obj_growable_scene_data *growable_data, char *filename)
 			strcpy(pathMtl, RESSOURCE_PATH);
 			strcat(pathMtl, growable_data->material_filename);
 			obj_parse_mtl_file(pathMtl, &growable_data->material_list);
-			std::cout << "J'ai parsŽ le mtl" << std::endl;
 			continue;
 		}
 		

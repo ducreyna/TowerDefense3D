@@ -21,8 +21,9 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
-
 #include "objLoader.h"
+
+#include "Lighting.h"
 
 using namespace std;
 
@@ -36,10 +37,13 @@ public:
 	void reshape(int width, int height);
 	void addObject(objLoader *object);
 	void removeObject(objLoader *object);
+	/* Getters */
+	vector<objLoader*> getObjects();
 
 private:
 	/* Private attributes*/
 	vector<objLoader*> objects;
+	Lighting *lights;
 
 	/* Private methods */
 	void drawObject(objLoader* object);
