@@ -21,8 +21,8 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include "ObjectStructure.h"
 #include "objLoader.h"
-
 #include "Lighting.h"
 
 using namespace std;
@@ -35,19 +35,19 @@ public:
 	/* Public methods */
 	void drawScene();
 	void reshape(int width, int height);
-	void addObject(objLoader *object);
-	void removeObject(objLoader *object);
+	void addObject(OBJECT object);
+	void removeObject(OBJECT object);
 	/* Getters */
-	vector<objLoader*> getObjects();
+	vector<OBJECT> getObjects();
 
 private:
 	/* Private attributes*/
-	vector<objLoader*> objects;
+	vector<OBJECT> objects;
 	Lighting *lights;
 
 	/* Private methods */
-	void drawObject(objLoader* object);
-	void drawFace(objLoader *object, int indexFace);
+	void drawObject(OBJECT object);
+	void drawFace(OBJECT object, int indexFace);
 	void drawRepere();
 };
 

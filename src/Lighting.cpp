@@ -22,7 +22,7 @@ Lighting::Lighting()
 	source.position.z = 10;
 	source.position.w = 1;
 	source.allure_faisceau.k = 1;
-	source.allure_faisceau.theta = 40;
+	source.allure_faisceau.theta = 180;
 	source.direction.x = 0;
 	source.direction.y = 0;
 	source.direction.z = -1;
@@ -69,25 +69,25 @@ void Lighting::defineMaterials(int indexMaterial)
 
 	for(i = 0; i < this->objects.size(); i++)
 	{
-		vect[0] = this->objects[i]->materialList[indexMaterial]->amb[0];
-		vect[1] = this->objects[i]->materialList[indexMaterial]->amb[1];
-		vect[2] = this->objects[i]->materialList[indexMaterial]->amb[2];
+		vect[0] = this->objects[i].obj->materialList[indexMaterial]->amb[0];
+		vect[1] = this->objects[i].obj->materialList[indexMaterial]->amb[1];
+		vect[2] = this->objects[i].obj->materialList[indexMaterial]->amb[2];
 		vect[3] = 1.0;
 		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, vect);
 
-		vect[0] = this->objects[i]->materialList[indexMaterial]->diff[0];
-		vect[1] = this->objects[i]->materialList[indexMaterial]->diff[1];
-		vect[2] = this->objects[i]->materialList[indexMaterial]->diff[2];
+		vect[0] = this->objects[i].obj->materialList[indexMaterial]->diff[0];
+		vect[1] = this->objects[i].obj->materialList[indexMaterial]->diff[1];
+		vect[2] = this->objects[i].obj->materialList[indexMaterial]->diff[2];
 		vect[3] = 1.0;
 		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, vect);
 
-		vect[0] = this->objects[i]->materialList[indexMaterial]->spec[0];
-		vect[1] = this->objects[i]->materialList[indexMaterial]->spec[1];
-		vect[2] = this->objects[i]->materialList[indexMaterial]->spec[2];
+		vect[0] = this->objects[i].obj->materialList[indexMaterial]->spec[0];
+		vect[1] = this->objects[i].obj->materialList[indexMaterial]->spec[1];
+		vect[2] = this->objects[i].obj->materialList[indexMaterial]->spec[2];
 		vect[3] = 1.0;
 		glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, vect);
 
-		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this->objects[i]->materialList[indexMaterial]->shiny);
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, this->objects[i].obj->materialList[indexMaterial]->shiny);
 
 		/*vect[0]=scene->tabmat[i].emission.r;
 		vect[1]=scene->tabmat[i].emission.g;
@@ -204,7 +204,7 @@ void Lighting::defineSources()
  * Setter for the vector of objects
  * @param objects Vector of objects in the scene
  */
-void Lighting::setObjects(vector<objLoader*> objects)
+void Lighting::setObjects(vector<OBJECT> objects)
 {
 	this->objects = objects;
 }

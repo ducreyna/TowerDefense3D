@@ -19,12 +19,12 @@
 #include <iostream>
 #include <string>
 #include <stdio.h>
-#include "objLoader.h"
+#include "ObjectStructure.h"
 #include "Scene.h"
 
 using namespace std;
 
-objLoader *landscape;
+OBJECT landscape;
 Scene *scene;
 double myObsParam[16];
 
@@ -39,7 +39,7 @@ void init()
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(15,15,10,0,0,0,0,0,1) ;
+    gluLookAt(20,20,10,0,0,0,0,0,1) ;
     glGetDoublev(GL_MODELVIEW_MATRIX, myObsParam);
 
     /* Set the background color: RGB mode */
@@ -77,8 +77,9 @@ int main(int argc, char **argv)
 	scene = new Scene();
 
     // Loading the static environnement
-    landscape = new objLoader();
-    landscape->load((char *) "terrain_lo12.obj");
+	landscape.type = 0;
+    landscape.obj = new objLoader();
+    landscape.obj->load((char *) "terrain_lo12.obj");
 
 	scene->addObject(landscape);
     

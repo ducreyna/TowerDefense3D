@@ -19,7 +19,7 @@
 #endif
 
 #include "LightStruture.h"
-#include "objLoader.h"
+#include "ObjectStructure.h"
 #include <iostream>
 #include <math.h>
 #include <vector>
@@ -37,11 +37,11 @@ public:
 	void defineMaterials(int indexMaterial);
 	void defineSources();
 	/* Setters */
-	void setObjects(vector<objLoader*> objects);
+	void setObjects(vector<OBJECT> objects);
 
 private:
 	/* Attributes */
-	vector<objLoader*> objects;
+	vector<OBJECT> objects;
 	vector<LIGHT_SOURCE> lightSources;
 
 	/* Methods */

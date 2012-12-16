@@ -42,9 +42,9 @@ void Scene::drawScene()
  * Method for drawing an object
  * @param *object The object to draw in the scene
  */
-void Scene::drawObject(objLoader* object)
+void Scene::drawObject(OBJECT object)
 {
-	for(int i = 0; i < object->faceCount; i++)
+	for(int i = 0; i < object.obj->faceCount; i++)
 	{
 		glPushMatrix();
 		drawFace(object, i);
@@ -57,7 +57,7 @@ void Scene::drawObject(objLoader* object)
  * @param *object The object that owns the face
  * @param indexFace The index of the face
  */
-void Scene::drawFace(objLoader *object, int indexFace)
+void Scene::drawFace(OBJECT object, int indexFace)
 {
 	int j;
 
@@ -66,23 +66,23 @@ void Scene::drawFace(objLoader *object, int indexFace)
 	glBegin(GL_POLYGON);
 	// TODO definir les normales
 	GLdouble A[3];
-	j = object->faceList[indexFace]->normal_index[0];
-	A[0] = object->normalList[j]->e[0];
-	A[1] = object->normalList[j]->e[1];
-	A[2] = object->normalList[j]->e[2];
+	j = object.obj->faceList[indexFace]->normal_index[0];
+	A[0] = object.obj->normalList[j]->e[0];
+	A[1] = object.obj->normalList[j]->e[1];
+	A[2] = object.obj->normalList[j]->e[2];
 	glNormal3dv(A);
 
 	// Couleur verte
 		glColor3d(0, 1, 0);
 
 	// Material definition
-	if(object->faceList[indexFace]->material_index != -1)
-		this->lights->defineMaterials(object->faceList[indexFace]->material_index);
+	if(object.obj->faceList[indexFace]->material_index != -1)
+		this->lights->defineMaterials(object.obj->faceList[indexFace]->material_index);
 
-	for(int i = 0; i < object->faceList[indexFace]->vertex_count; i++)
+	for(int i = 0; i < object.obj->faceList[indexFace]->vertex_count; i++)
 	{
-		j = object->faceList[indexFace]->vertex_index[i];
-		glVertex3d(object->vertexList[j]->e[0], object->vertexList[j]->e[1], object->vertexList[j]->e[2]);
+		j = object.obj->faceList[indexFace]->vertex_index[i];
+		glVertex3d(object.obj->vertexList[j]->e[0], object.obj->vertexList[j]->e[1], object.obj->vertexList[j]->e[2]);
 	}
 
 	glEnd();
@@ -132,7 +132,7 @@ void Scene::reshape(int width, int height)
  * Public method for adding an object in the scene
  * @param The object to add
  */
-void Scene::addObject(objLoader *object)
+void Scene::addObject(OBJECT object)
 {
 	this->objects.push_back(object);
 }
@@ -141,17 +141,17 @@ void Scene::addObject(objLoader *object)
  * Public method for removing an object in the scene
  * @param The object to remove
  */
-void Scene::removeObject(objLoader *object)
+void Scene::removeObject(OBJECT object)
 {
 	bool found = false;
 	for (unsigned int i = 0; !found && i < this->objects.size(); ++i)
 	{
-		if (this->objects[i] == object)
+		if (this->objects[i].obj == object.obj)
 		{
 			this->objects[i] = this->objects[this->objects.size() -1];
 			this->objects.pop_back();
 			found = true;
-			free(object);
+			free(object.obj);
 		}
 	}
 }
@@ -159,7 +159,7 @@ void Scene::removeObject(objLoader *object)
 /**
  * Getter for objects list
  */
-vector<objLoader*> Scene::getObjects()
+vector<OBJECT> Scene::getObjects()
 {
 	return this->objects;
 }
