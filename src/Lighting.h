@@ -21,11 +21,12 @@
 #include "LightStruture.h"
 #include "ObjectStructure.h"
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <vector>
 
+#define pi 3.14159265
+
 using namespace std;
-class Scene;
 
 class Lighting {
 public:
@@ -34,19 +35,22 @@ public:
 	virtual ~Lighting();
 
 	/* Methods */
-	void defineMaterials(int indexMaterial);
+	void defineMaterials(int indexObject, int indexMaterial);
 	void defineSources();
+	void switchLighting();
+	void rotateSpotTower(double angle, double centerX, double centerY, double centerZ);
 	/* Setters */
-	void setObjects(vector<OBJECT> objects);
-
+	void setObjects(vector<OBJECT*> objects);
+	GLdouble* vectorProduct(GLdouble u[3], GLdouble v[3]);
 private:
 	/* Attributes */
-	vector<OBJECT> objects;
+	vector<OBJECT*> objects;
 	vector<LIGHT_SOURCE> lightSources;
+	double curAngle;
 
 	/* Methods */
 	GLdouble norm(GLdouble v[3]);
-	GLdouble* vectorProduct(GLdouble u[3], GLdouble v[3]);
+
 	GLenum ligth_i(int i);
 };
 

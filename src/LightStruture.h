@@ -34,6 +34,11 @@ struct ALLURE_FAISCEAU
 
 struct LIGHT_SOURCE
 {
+	/*
+	 * 0 => global
+	 * 1 => departure + arrival + tower spots
+	 */
+	int id;
 	RGB             ambiant;         /* couleur "ambiente" */
 	RGB             color;          /* couleur de la source */
 	COORD           position;         /* position de la source */

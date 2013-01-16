@@ -2,7 +2,7 @@
 #define OBJ_LOADER_H
 
 #include "obj_parser.h"
-#define RESSOURCE_PATH "ressources/"
+#define RESSOURCE_PATH "./ressources/"
 
 class objLoader
 {

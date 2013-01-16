@@ -2,7 +2,7 @@
 # Material Count: 10
 newmtl _bark4.dds
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -12,7 +12,7 @@ map_Kd bark4.png
 
 newmtl _bark5.dds
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -22,7 +22,7 @@ map_Kd bark5.png
 
 newmtl _dirt3_edges.png
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.70000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -32,7 +32,7 @@ map_Kd dirt3_edges.png
 
 newmtl _leaves17.dds
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -42,7 +42,7 @@ map_Kd leaves17.png
 
 newmtl _leaves19.dds
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -52,7 +52,7 @@ map_Kd leaves19.png
 
 newmtl _stonewall6.dds
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -62,7 +62,7 @@ map_Kd stonewall6.png
 
 newmtl _stonewall6.dds.003
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -72,7 +72,7 @@ map_Kd shingles3.png
 
 newmtl _stonewall6.dds.004
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -81,8 +81,8 @@ map_Kd castledoorwins.png
 
 
 newmtl _tile28.dds
-Ns 0
-Ka 0.000000 0.000000 0.000000
+Ns 10
+Ka 1.00000 1.00000 1.00000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
@@ -92,7 +92,7 @@ map_Kd tile28.png
 
 newmtl _tree_branches-leaves0
 Ns 0
-Ka 0.000000 0.000000 0.000000
+Ka 0.700000 0.700000 0.700000
 Kd 0.8 0.8 0.8
 Ks 0.8 0.8 0.8
 d 1
